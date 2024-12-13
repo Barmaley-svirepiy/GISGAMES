@@ -1,0 +1,143 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: Arial, sans-serif; /* Добавляем фон для страницы */
+    background-image: url('img/Cat.png'); /* Фоновое изображение */
+    background-size: cover; /* Фон занимает всю площадь экрана */
+    background-repeat: no-repeat; /* Не повторять изображение */
+    background-position: center; /* Положение изображения по центру */
+}
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; /* Контейнер занимает всю ширину экрана */
+    max-width: 1200px; /* Максимальная ширина контейнера */
+    position: relative; /* Для позиционирования элементов внутри */
+    height: 100%; /* Контейнер занимает всю высоту экрана */
+}
+
+/* Элементы управления */
+.ui-container {
+    display: flex;
+    flex-direction: row; /* Располагаем элементы в строку */
+    justify-content: space-between; /* Разводим текст и кнопки в стороны */
+    align-items: center; /* Выравниваем по центру по вертикали */
+    gap: 20px; /* Расстояние между элементами управления */
+    width: 100%; /* Контейнер занимает всю ширину */
+    padding: 20px; /* Добавляем отступы */
+    box-sizing: border-box; /* Учитываем padding в общей ширине */
+    flex-shrink: 0; /* Не позволяем элементам управления сжиматься */
+    position: absolute; /* Позиционируем элементы управления */
+    top: 25%; /* Поднимаем на половину экрана */
+    left: 0; /* Располагаем слева */
+    right: 0; /* Располагаем справа */
+}
+
+/* Контейнер для текста */
+.text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px; /* Расстояние между текстовыми элементами */
+    margin-left: -700px; /* Сдвигаем текст ещё левее */
+    margin-top: 335px;
+}
+
+/* Текст вне кнопок */
+.score, .depth {
+    font-size: 18px;
+    font-weight: bold;
+    color: #592204; /* Цвет текста вне кнопок */
+}
+
+/* Контейнер для кнопок */
+.buttons-container {
+    display: flex;
+    flex-direction: column; /* Кнопки одна над другой */
+    align-items: center; /* Выравниваем кнопки по центру */
+    gap: 10px; /* Расстояние между кнопками */
+    margin-right: -700px; /* Сдвигаем кнопки ещё правее */
+    margin-top: 335px;
+}
+
+/* Кнопки */
+.ui-container button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 20px; /* Закругляем кнопки */
+    background-color: #F4147A; /* Цвет кнопок */
+    color: #F9DCDC; /* Цвет текста в кнопках */
+    transition: background-color 1s ease; /* Плавный переход цвета */
+}
+
+.ui-container button:hover {
+    background-color: #D10F64; /* Цвет кнопок при наведении */
+}
+
+/* Холст */
+#gameCanvas {
+    width: 210%; /* Канвас занимает всю ширину контейнера */
+    height: 42%; /* Канвас занимает нижнюю половину экрана */
+    border: none;
+    background-color: transparent; /* Прозрачный фон для холста */
+    position: absolute; /* Позиционируем холст */
+    bottom: 0; /* Прижимаем холст к нижней части экрана */
+}
+
+/* Адаптивность */
+@media (max-width: 1200px) {
+    .text-container {
+        margin-left: -400px; /* Уменьшаем отступ для средних экранов */
+    }
+
+    .buttons-container {
+        margin-right: -400px; /* Уменьшаем отступ для средних экранов */
+    }
+}
+
+@media (max-width: 768px) {
+    .ui-container {
+        flex-direction: column; /* На маленьких экранах элементы в столбец */
+        align-items: center; /* Выравниваем по центру */
+        top: 20%; /* Поднимаем на меньшую высоту на маленьких экранах */
+    }
+
+    .text-container, .buttons-container {
+        margin: 0; /* Убираем отступы для адаптивного дизайна */
+    }
+
+    .buttons-container {
+        margin-top: 20px; /* Добавляем отступ между текстом и кнопками */
+    }
+
+    .text-container {
+        gap: 20px; /* Уменьшаем расстояние между текстовыми элементами */
+    }
+}
+
+@media (max-width: 480px) {
+    .ui-container {
+        top: 15%; /* Поднимаем ещё выше на маленьких экранах */
+    }
+
+    .text-container {
+        gap: 10px; /* Уменьшаем расстояние между текстовыми элементами */
+    }
+
+    .ui-container button {
+        padding: 8px 16px; /* Уменьшаем размер кнопок */
+        font-size: 14px; /* Уменьшаем размер текста в кнопках */
+    }
+
+    .score, .depth {
+        font-size: 16px; /* Уменьшаем размер текста */
+    }
+}
