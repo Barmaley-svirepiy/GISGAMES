@@ -2,45 +2,37 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
-// Размеры канваса
 canvas.width = 1200;
 canvas.height = window.innerHeight;
 
-// Глубина игрового поля
 const worldHeight = 4000;
 
-// Параметры крюка
+// крюк
 let hookX = canvas.width / 2.165;
 let hookY = 0;
-let hookSpeed = 300; // Скорость крюка
+let hookSpeed = 300;
 let hookMovingDown = false;
 let hookMovingUp = false;
-let maxDepth = 2000; // Изначальная максимальная глубина
+let maxDepth = 2000;
 
 let score = 0;
 
-// Позиция камеры
 let cameraY = 0;
 
-// Количество рыб
 const fishCount = 40;
 
-// Массив с рыбами
 let fishArray = [];
 
-// Загрузка изображения рыбы
 function loadFishImage(index) {
     const img = new Image();
     img.src = `img/Рыба-${index}.png`;
-
-    // Устанавливаем флаг для проверки загрузки
     img.onload = () => (img.loaded = true);
     img.onerror = () => console.error(`Failed to load image: img/Рыба-${index}.png`);
 
     return img;
 }
 
-// Функция для создания рыб
+// созданиt рыб
 function createFishArray() {
     fishArray = [];
     for (let i = 0; i < fishCount; i++) {
@@ -60,8 +52,6 @@ function createFishArray() {
         });
     }
 }
-
-// Создаем начальный набор рыб
 createFishArray();
 
 // Элементы управления
@@ -70,14 +60,12 @@ const upgradeDepthBtn = document.getElementById('upgradeDepthBtn');
 const scoreDisplay = document.getElementById('score');
 const maxDepthDisplay = document.getElementById('maxDepth');
 
-// Обработчик для сброса крюка
 dropHookBtn.addEventListener('click', () => {
     if (!hookMovingDown && !hookMovingUp) {
         hookMovingDown = true;
     }
 });
 
-// Обработчик для улучшения глубины
 upgradeDepthBtn.addEventListener('click', () => {
     if (score >= 100) {
         score -= 100;
@@ -87,9 +75,7 @@ upgradeDepthBtn.addEventListener('click', () => {
     }
 });
 
-// Игровой цикл
 let lastTime = 0;
-
 function update(deltaTime) {
     const hookDelta = (hookSpeed * deltaTime) / 1000;
 
@@ -120,13 +106,12 @@ function update(deltaTime) {
         if (hookY <= 0) {
             hookMovingUp = false;
             hookY = 0;
-            createFishArray(); // Обновляем рыб после броска крюка
+            createFishArray(); 
         }
     }
 
     moveFish(deltaTime);
-
-    // Центрируем камеру на крюке
+    
     cameraY = Math.min(
         Math.max(hookY - canvas.height / 2, 0),
         worldHeight - canvas.height
@@ -138,19 +123,18 @@ function update(deltaTime) {
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Рисуем крюк
+   
     ctx.fillStyle = '#BABF9E'; // Цвет крюка
     ctx.beginPath();
     ctx.arc(hookX, hookY - cameraY, 10, 0, Math.PI * 2); // Рисуем круг
     ctx.fill();
     ctx.closePath();
 
-    // Рисуем рыб
     fishArray.forEach(fish => {
         if (!fish.caught && fish.image.loaded) {
             ctx.save();
 
-            // Если рыба плывет влево, отражаем по оси X
+            
             if (fish.speedX < 0) {
                 ctx.scale(-1, 1); // Отражение по горизонтали
                 ctx.drawImage(
@@ -161,7 +145,6 @@ function draw() {
                     fish.height
                 );
             } else {
-                // Обычное рисование для движения вправо
                 ctx.drawImage(
                     fish.image,
                     fish.x,
@@ -182,7 +165,6 @@ function moveFish(deltaTime) {
         fish.x += fish.speedX * fishDelta;
         fish.y += fish.speedY * fishDelta;
 
-        // Отскок от краев
         if (fish.x <= 0 || fish.x + fish.width >= canvas.width) {
             fish.speedX = -fish.speedX;
         }
@@ -201,7 +183,7 @@ function gameLoop(timestamp) {
     requestAnimationFrame(gameLoop);
 }
 
-// Управление крюком
+
 window.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft' && hookX > 0) {
         hookX -= 20;
