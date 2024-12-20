@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Fishing Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Элементы управления -->
+        <div class="ui-container">
+            <div class="text-container">
+                <div class="score">Очки: <span id="score">0</span></div>
+                <div class="depth">Глубина погружения: <span id="maxDepth">2000</span></div>
+            </div>
+            <div class="buttons-container">
+                <button id="dropHookBtn" class="dropHookBtn">Закинуть крюк</button>
+                <button id="upgradeDepthBtn" class="upgradeDepthBtn">Увеличить глубину (-100 очков)</button>
+            </div>
+        </div>
+
+        <!-- Холст -->
+        <canvas id="gameCanvas"></canvas>
+    </div>
+    <script src="fishing.js"></script>
+</body>
+</html>

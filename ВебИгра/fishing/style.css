@@ -1,0 +1,83 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    background-image: url('img/Cat.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    overflow: hidden; /* Убираем прокрутку */
+}
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px; /* Фиксированная ширина контейнера */
+    position: relative;
+    height: 100%;
+}
+
+.ui-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    position: absolute;
+    top: 10%; /* Расположение сверху */
+    left: 0;
+    right: 0;
+}
+
+.text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.score, .depth {
+    font-size: 18px;
+    font-weight: bold;
+    color: #592204;
+}
+
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.ui-container button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 20px;
+    background-color: #F4147A;
+    color: #F9DCDC;
+    transition: background-color 0.3s ease;
+}
+
+.ui-container button:hover {
+    background-color: #D10F64;
+}
+
+#gameCanvas {
+    width: 100%;
+    height: 60%; /* Увеличенная высота холста */
+    border: none;
+    background-color: transparent;
+    position: absolute;
+    bottom: 0;
+}
